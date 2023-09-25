@@ -1,0 +1,8 @@
+IP: 130.193.41.14;
+name_taski: https://supertaski.servehttp.com/;
+name_kittygram: https://kittyinfragramm.ddns.net/;
+login: логин: ADMIN;
+password: qq;
+
+
+
