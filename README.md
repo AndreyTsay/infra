@@ -3,7 +3,7 @@ Dedicated to every kitty in the world
 
 ___
 
-### INTRODUCTION
+## INTRODUCTION
 A social network for furry and cute cats!
 
 ___
@@ -117,15 +117,18 @@ Collect the frontend static
 npm run build
 ```
 
-Bind Gunicorn and the backend wia systemd
+Bind Gunicorn and the backend via systemd
 
+The command below, copy file for gunicorn service
 ```
-sudo nano /etc/systemd/system/gunicorn.service
+sudo cp -r /home/<your username>/infra/infra/gunicorn_kittygram.service  /etc/systemd/system/gunicorn_kittygram.service
 ```
 
 Past the following code, replacing `<system-username>` 3 times with your actual data
 
 Note: To find the exact path to Gunicorn, activate virtual environtment and use `which gunicorn` in command prompt
+
+The code which was copied by command:
 
 ```
 [Unit]
@@ -144,8 +147,8 @@ WantedBy=multi-user.target
 Start the Gunicorn proccess and add it to Ubunty startup
 
 ```
-sudo systemctl start gunicorn
-sudo systemctl enable gunicorn
+sudo systemctl start gunicorn_kittygram.service 
+sudo systemctl enable gunicorn_kittygram.service 
 ```
 
 Copy the frontend and backend static to the system default static folder, replacing `<system-username>` with your actual data
@@ -161,14 +164,13 @@ Create local folder to collect media and update rules, replacing `<system-userna
 sudo mkdir media
 sudo chown -R <system-username> /var/www/kittygram/media/
 ```
-
-Open the Nginx config file for editing
+The command below, copy file for Nginx config
 
 ```
-sudo nano /etc/nginx/sites-enabled/default
+sudo cp -r /home/<your username>/infra/infra/default  /etc/nginx/sites-enabled/default
 ```
 
-Replace everything with the following code (replace `<you.ya.cloud.ip>` and `<youdomainname>` with you actial data)
+The code which was copied by command:
 
 ```
 server {
@@ -211,4 +213,3 @@ ___
 ## Author
 
 **Created by Andrey Tsay, according to the methodological data of Yandex Practicum**
-
