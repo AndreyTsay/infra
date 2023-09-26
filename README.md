@@ -1,5 +1,5 @@
 # Kittygram social network 
-###### Dedicated to every kitty in the world
+Dedicated to every kitty in the world
 
 ___
 
@@ -8,12 +8,12 @@ A social network for furry and cute cats!
 
 ___
 
-### PROJECT DESCRIPTION
+## PROJECT DESCRIPTION
 
 Welcome to Kittygram, a wonderful platform for all cat lovers! Get ready to create accounts, keep cat profiles in a live community of other cat lovers. Demonstrate the photogenic charm of your cat, share her most unusual achievements and celebrate birthdays in style. Study adorable feline profiles, and bask in the glory of all feline! Sign up today and embark on a journey through the charming world of our furry companions
 ___
 
-### TECH
+## TECH
 
 [Python] - backend target language
 
@@ -31,13 +31,12 @@ ___
 
 ___
 
-### DEPLOYMENT
+## DEPLOYMENT
 
-Obtain a domain name
+### Perform the following steps on your remote server!
+**Obtain a domain name**
 
-Set up a remote server with Ubuntu
-
-##### **Perform the following steps on your remote server!**
+**Set up a remote server with Ubuntu**
 
 Install python3
 
@@ -130,13 +129,13 @@ Note: To find the exact path to Gunicorn, activate virtual environtment and use 
 
 ```
 [Unit]
-Description=gunicorn daemon
+Description=gunicorn daemon kitty
 After=network.target
-
+ 
 [Service]
-User=<system-username>
-WorkingDirectory=/home/<system-username>/infra/backend/
-ExecStart=/home/<system-username>/infra/backend/venv/bin/gunicorn --bind 0.0.0.0:8000 kittygram_backend.wsgi
+User=<your username>
+WorkingDirectory=/home/<your username>/infra/backend/
+ExecStart=/home/<your username>/infra/backend/venv/bin/gunicorn --bind 0.0.0.0:8080 kittygram_backend.wsgi
 
 [Install]
 WantedBy=multi-user.target
@@ -173,29 +172,27 @@ Replace everything with the following code (replace `<you.ya.cloud.ip>` and `<yo
 
 ```
 server {
-
-    listen 80;
-    server_name <you.ip> <youdomainname>;
+    server_name <your_ip> <your_site_adress>;
 
     location /api/ {
-        proxy_pass http://127.0.0.1:8000;
+        client_max_body_size 20M;
+        proxy_pass http://127.0.0.1:8080;
     }
 
     location /admin/ {
-        proxy_pass http://127.0.0.1:8000;
+        client_max_body_size 20M;
+        proxy_pass http://127.0.0.1:8080;
     }
 
     location /media/ {
-        root /var/www/kittygram;
+        root /var/www/kittygram/;
     }
 
     location / {
-        root /var/www/Kittygram_Social_Network;
-        index index.html index.htm;
+        root   /var/www/kittygram;
+        index  index.html index.htm;
         try_files $uri /index.html;
     }
-
-}
 ```
 
 Set up the Ubuntu firewall and start it
@@ -211,3 +208,7 @@ Run Nginx
 sudo systemctl start nginx
 ```
 ___
+## Author
+
+**Created by Andrey Tsay, according to the methodological data of Yandex Practicum**
+
